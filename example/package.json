@@ -6,9 +6,9 @@
   "private": true,
   "dependencies": {
     "react": "file:../node_modules/react",
-    "react-dom": "^16.9.0",
+    "react-dom": "^17.0.1",
     "react-icons": "^4.1.0",
-    "react-scripts": "^3.0.1",
+    "react-scripts": "^4.0.1",
     "use-boop": "file:.."
   },
   "scripts": {

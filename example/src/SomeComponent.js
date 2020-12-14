@@ -1,4 +1,3 @@
-import * as React from 'react';
 import useBoop from 'use-boop';
 import { animated } from 'react-spring';
 import { AiOutlineClose, AiOutlineQuestionCircle } from 'react-icons/ai';
@@ -12,14 +11,14 @@ const SomeComponent = () => {
 
   return (
     <div className="container">
-      <animated.div style={styleQuestion}>
-        <AiOutlineQuestionCircle size={80} onMouseEnter={triggerQuestion} />
+      <animated.div style={styleQuestion} onMouseEnter={triggerQuestion}>
+        <AiOutlineQuestionCircle size={80} />
       </animated.div>
-      <animated.div style={styleClose}>
-        <AiOutlineClose size={80} onMouseEnter={triggerClose} />
+      <animated.div style={styleClose} onMouseEnter={triggerClose}>
+        <AiOutlineClose size={80} />
       </animated.div>
-      <animated.div style={styleLeft}>
-        <FaAngleLeft size={80} onMouseEnter={triggerLeft} />
+      <animated.div style={styleLeft} onMouseEnter={triggerLeft}>
+        <FaAngleLeft size={80} />
       </animated.div>
       <button onMouseEnter={triggerDown}>
         Show more

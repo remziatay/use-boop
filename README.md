@@ -13,7 +13,6 @@ npm install --save react-spring use-boop
 ## Usage
 
 ```js
-import * as React from 'react';
 import useBoop from 'use-boop';
 import { animated } from 'react-spring';
 

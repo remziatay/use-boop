@@ -1,6 +1,6 @@
 # use-boop
 
-> React hook for [Josh Comeau's boop effect](https://www.joshwcomeau.com/react/boop/)
+> Extended react hook for [Josh Comeau's boop effect](https://www.joshwcomeau.com/react/boop/)
 
 [![NPM](https://img.shields.io/npm/v/use-boop.svg)](https://www.npmjs.com/package/use-boop)
 
@@ -21,14 +21,10 @@ const SomeComponent = () => {
   const [style, trigger] = useBoop({ rotation: 45 });
 
   return (
-    <animated.div style={style}>
+    <animated.div style={style} onMouseEnter={trigger}>
       {/* Child can be anything */}
-      <AiOutlineQuestionCircle size={80} onMouseEnter={trigger} />
+      <AiOutlineQuestionCircle size={80} />
     </animated.div>
   );
 };
 ```
-
-## License
-
-MIT

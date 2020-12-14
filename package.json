@@ -1,6 +1,6 @@
 {
   "name": "use-boop",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Extended react hook for Josh Comeau's boop effect",
   "author": "remziatay",
   "license": "MIT",

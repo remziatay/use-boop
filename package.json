@@ -1,7 +1,7 @@
 {
   "name": "use-boop",
   "version": "1.0.0",
-  "description": "React hook for Josh Comeau&#x27;s boop effect",
+  "description": "Extended react hook for Josh Comeau's boop effect",
   "author": "remziatay",
   "license": "MIT",
   "repository": "remziatay/use-boop",
@@ -9,6 +9,13 @@
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
   "jsnext:main": "dist/index.es.js",
+  "keywords": [
+    "boop",
+    "useBoop",
+    "spring",
+    "react",
+    "hook"
+  ],
   "engines": {
     "node": ">=8",
     "npm": ">=5"

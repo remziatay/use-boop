@@ -1,4 +1,4 @@
-import { CSSProperties, useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { SpringValue, useSpring } from 'react-spring';
 import usePrefersReducedMotion from './use-prefers-reduced-motion';
 
@@ -23,9 +23,11 @@ interface Args {
   };
   delay?: number;
 }
-type SpringStyle = {
-  transform: SpringValue<string>;
-};
+type SpringStyle =
+  | {
+      transform: SpringValue<string>;
+    }
+  | {};
 export type BoopTuple = [SpringStyle, () => (() => void) | undefined];
 
 const useBoop: (args: Args) => BoopTuple = function ({
@@ -51,7 +53,7 @@ const useBoop: (args: Args) => BoopTuple = function ({
 }) {
   const prefersReducedMotion = usePrefersReducedMotion();
   const [isBooped, setIsBooped] = useState(false);
-  let style: CSSProperties = useSpring({
+  let style: SpringStyle = useSpring({
     transform: isBooped
       ? `translate3D(${x}px, ${y}px, ${z}px)
          rotateX(${rx}deg) rotateY(${ry}deg) rotateZ(${rz}deg)

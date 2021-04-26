@@ -1,5 +1,5 @@
 import { CSSProperties, useCallback, useEffect, useState } from 'react';
-import { useSpring } from 'react-spring';
+import { SpringValue, useSpring } from 'react-spring';
 import usePrefersReducedMotion from './use-prefers-reduced-motion';
 
 interface Args {
@@ -23,8 +23,10 @@ interface Args {
   };
   delay?: number;
 }
-
-export type BoopTuple = [CSSProperties, () => (() => void) | undefined];
+type SpringStyle = {
+  transform: SpringValue<string>;
+};
+export type BoopTuple = [SpringStyle, () => (() => void) | undefined];
 
 const useBoop: (args: Args) => BoopTuple = function ({
   x = 0,

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { SpringValue, useSpring } from 'react-spring';
 import usePrefersReducedMotion from './use-prefers-reduced-motion';
 
@@ -22,15 +22,15 @@ interface Args {
     friction?: number;
   };
   delay?: number;
-}
-type SpringStyle =
-  | {
-      transform: SpringValue<string>;
-    }
-  | {};
-export type BoopTuple = [SpringStyle, () => (() => void) | undefined];
+};
 
-const useBoop: (args: Args) => BoopTuple = function ({
+interface SpringStyle {
+  transform?: SpringValue<string>;
+};
+
+type Boop = (args: Args) => [SpringStyle, () => void];
+
+const useBoop: Boop = ({
   x = 0,
   y = 0,
   z = 0,
@@ -50,10 +50,11 @@ const useBoop: (args: Args) => BoopTuple = function ({
     friction: 10,
   },
   delay = 0,
-}) {
+} = {}) => {
   const prefersReducedMotion = usePrefersReducedMotion();
   const [isBooped, setIsBooped] = useState(false);
-  let style: SpringStyle = useSpring({
+  const [isTriggered, setIsTriggered] = useState(false);
+  const style: SpringStyle = useSpring(prefersReducedMotion ? {} : {
     transform: isBooped
       ? `translate3D(${x}px, ${y}px, ${z}px)
          rotateX(${rx}deg) rotateY(${ry}deg) rotateZ(${rz}deg)
@@ -67,19 +68,26 @@ const useBoop: (args: Args) => BoopTuple = function ({
     immediate: prefersReducedMotion,
   });
 
-  if (prefersReducedMotion) style = {};
-
   const trigger = useCallback(() => {
-    if (prefersReducedMotion) return;
-    const timeoutId = window.setTimeout(() => setIsBooped(true), delay);
+    if (!prefersReducedMotion) {
+      setIsTriggered(true);
+    }
+  }, [prefersReducedMotion]);
+
+  useEffect(() => {
+    if (!isTriggered) return;
+    const timeoutId = window.setTimeout(() => {
+      setIsBooped(true);
+      setIsTriggered(false);
+    }, delay);
     return () => window.clearTimeout(timeoutId);
-  }, [prefersReducedMotion, delay]);
+  }, [isTriggered, delay]);
 
   useEffect(() => {
     if (!isBooped) return;
     const timeoutId = window.setTimeout(() => setIsBooped(false), timing);
     return () => window.clearTimeout(timeoutId);
-  }, [timing, isBooped]);
+  }, [isBooped, timing]);
 
   return [style, trigger];
 };

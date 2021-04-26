@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, CSSProperties } from 'react';
+import { CSSProperties, useCallback, useEffect, useState } from 'react';
 import { useSpring } from 'react-spring';
 import usePrefersReducedMotion from './use-prefers-reduced-motion';
 
@@ -24,9 +24,9 @@ interface Args {
   delay?: number;
 }
 
-const useBoop: (
-  args: Args
-) => (CSSProperties | (() => (() => void) | undefined))[] = function ({
+export type BoopTuple = [CSSProperties, () => (() => void) | undefined];
+
+const useBoop: (args: Args) => BoopTuple = function ({
   x = 0,
   y = 0,
   z = 0,
